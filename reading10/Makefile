@@ -2,12 +2,14 @@ CC=	gcc
 CFLAGS=	-Wall -g -std=gnu99
 LIBS=	
 
-test:	test-quiz test-program
+test:	
+	@$(MAKE) -sk test-quiz test-program
 
 program:    program.c
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 test-quiz:
+	../.scripts/submit.py
 
 test-program: program
 	curl -sLO https://raw.githubusercontent.com/nd-cse-30341-fa20/cse-30341-fa20-assignments/master/reading10/test_program.sh
