@@ -51,9 +51,10 @@ def submit_quiz(assignment, path):
         print('No quiz found (answers.{json,yaml})')
         return 1
 
-    print('\nSubmitting {} quiz ...'.format(assignment))
+    print('Submitting {} quiz ...'.format(assignment))
     response = requests.post(DREDD_QUIZ_URL + assignment, data=json.dumps(answers))
     print_results(response.json().items())
+    print()
 
     return 0 if response.json().get('score', 0) >= DREDD_QUIZ_MAX else 1
 
