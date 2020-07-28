@@ -15,7 +15,7 @@ False
 EOF
 }
 
-printf "Testing Reading 01 program ... "
+printf "Testing reading01 program ... "
 
 DIFF=$(diff <(./program 2> /dev/null) <(output) | grep "^>" | wc -l)
 SCORE=$(echo "scale=2; (10 - $DIFF) * 3.0 / 10.0" | bc)
