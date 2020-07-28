@@ -10,7 +10,7 @@ program:    program.c
 test-quiz:
 
 test-program: program
-	curl -sLO https://github.com/nd-cse-30341-fa20/cse-30341-fa20-assignments/raw/master/test_program.sh
+	curl -sLO https://raw.githubusercontent.com/nd-cse-30341-fa20/cse-30341-fa20-assignments/master/reading09/test_program.sh
 	chmod +x test_program.sh
 	./test_program.sh
 
