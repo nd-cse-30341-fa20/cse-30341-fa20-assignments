@@ -25,5 +25,5 @@ else
     echo "Failure"
 fi
 
-echo "   Score $DIFF"
+echo "   Score $SCORE"
 exit $DIFF
