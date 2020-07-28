@@ -5,4 +5,5 @@
 *.exe
 *.so
 *.a
+reading*/program
 reading*/test_program.sh
