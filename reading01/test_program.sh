@@ -12,6 +12,8 @@ True
 False
 True
 False
+True
+False
 EOF
 }
 
