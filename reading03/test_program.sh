@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WORKSPACE=/tmp/reading02.$(id -u)
+WORKSPACE=/tmp/reading03.$(id -u)
 FAILURES=0
 
 error() {
@@ -40,7 +40,7 @@ mkdir $WORKSPACE
 trap "cleanup" EXIT
 trap "cleanup 1" INT TERM
 
-echo "Testing reading02 program..."
+echo "Testing reading03 program..."
 
 
 printf " %-60s ... " "I/O System Calls"
