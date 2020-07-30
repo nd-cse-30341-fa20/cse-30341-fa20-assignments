@@ -20,7 +20,10 @@ EOF
 printf "Testing reading01 program ... "
 
 DIFF=$(diff <(./program 2> /dev/null) <(output) | grep "^>" | wc -l)
-SCORE=$(echo "scale=2; (10 - $DIFF) * 3.0 / 10.0" | bc)
+SCORE=$(python3 <<EOF
+print("{:0.2f}".format((10 - $DIFF) * 3.0 / 10.0))
+EOF
+)
 if [ "$DIFF" -eq 0 ]; then
     echo "Success"
 else
