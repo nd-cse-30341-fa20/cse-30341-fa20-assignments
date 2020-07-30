@@ -157,4 +157,8 @@ fi
 
 
 TESTS=$(($(grep -c Success $0) - 1))
-echo "   Score $(echo "scale=2; ($TESTS - $FAILURES) / $TESTS.0 * 3.0" | bc)"
+SCORE=$(python3 <<EOF
+print("{:0.2f}".format(($TESTS - $FAILURES) * 3.0 / $TESTS))
+EOF
+)
+echo "   Score $SCORE"
