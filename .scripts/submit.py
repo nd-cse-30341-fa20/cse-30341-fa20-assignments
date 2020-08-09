@@ -11,8 +11,9 @@ import yaml
 # Globals
 
 ASSIGNMENTS     = {}
-DREDD_QUIZ_URL  = 'https://dredd.h4x0r.space/quiz/cse-30341-fa20/'
-DREDD_QUIZ_MAX  = 3.0
+DREDD_QUIZ_URL = 'https://dredd.h4x0r.space/quiz/cse-30341-fa20/'
+DREDD_READING_QUIZ_MAX = 3.0
+DREDD_PROJECT_QUIZ_MAX = 4.0
 
 # Utilities
 
@@ -20,7 +21,7 @@ def add_assignment(assignment, path=None):
     if path is None:
         path = assignment
 
-    if assignment.startswith('reading') or assignment.startswith('challenge'):
+    if assignment.startswith('reading') or assignment.startswith('project'):
         ASSIGNMENTS[assignment] = path
 
 def print_results(results):
@@ -56,7 +57,8 @@ def submit_quiz(assignment, path):
     print_results(response.json().items())
     print()
 
-    return 0 if response.json().get('score', 0) >= DREDD_QUIZ_MAX else 1
+    quiz_max = DREDD_READING_QUIZ_MAX if 'reading' in assignment else DREDD_PROJECT_QUIZ_MAX
+    return 0 if response.json().get('score', 0) >= quiz_max else 1
 
 # Main Execution
 
@@ -86,7 +88,7 @@ exit_code = 0
 
 for assignment, path in sorted(ASSIGNMENTS.items()):
     print('Submitting {} assignment ...'.format(assignment))
-    if 'reading' in assignment:
+    if 'reading' in assignment or 'project' in assignment:
         exit_code += submit_quiz(assignment, path)
 
 sys.exit(exit_code)
