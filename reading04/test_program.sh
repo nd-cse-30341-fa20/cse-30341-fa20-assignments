@@ -6,7 +6,7 @@ output() {
 	tr 'A-Za-z' 'N-ZA-Mn-za-m'
 }
 
-printf "Testing reading01 program ... "
+printf "Testing reading04 program ... "
 
 DIFF=$(diff <(./program 2> /dev/null) <(output) | grep "^>" | wc -l)
 SCORE=$(python3 <<EOF
