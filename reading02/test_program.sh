@@ -3,6 +3,15 @@
 WORKSPACE=/tmp/reading02.$(id -u)
 FAILURES=0
 
+case $(uname) in
+Darwin)
+    SHA1SUM=shasum
+    ;;
+*)
+    SHA1SUM=sha1sum
+    ;;
+esac
+
 error() {
     echo "$@"
     [ -r $WORKSPACE/test ] && (echo; cat $WORKSPACE/test; echo)
@@ -34,6 +43,7 @@ grep_any() {
     done
     return 0;
 }
+
 
 mkdir $WORKSPACE
 
@@ -85,7 +95,7 @@ fi
 
 ARGUMENTS="Makefile"
 printf " %-60s ... " "program $ARGUMENTS"
-diff -u <(sha1sum $ARGUMENTS) <(./program $ARGUMENTS) &> $WORKSPACE/test
+diff -u <($SHA1SUM $ARGUMENTS) <(./program $ARGUMENTS) &> $WORKSPACE/test
 if [ $? -ne 0 ]; then
     error "Failure"
 else
@@ -103,7 +113,7 @@ fi
 
 ARGUMENTS="Makefile README.md"
 printf " %-60s ... " "program $ARGUMENTS"
-diff -u <(sha1sum $ARGUMENTS) <(./program $ARGUMENTS) &> $WORKSPACE/test
+diff -u <($SHA1SUM $ARGUMENTS) <(./program $ARGUMENTS) &> $WORKSPACE/test
 if [ $? -ne 0 ]; then
     error "Failure"
 else
@@ -121,7 +131,7 @@ fi
 
 ARGUMENTS="Makefile README.md program.c"
 printf " %-60s ... " "program $ARGUMENTS"
-diff -u <(sha1sum $ARGUMENTS) <(./program $ARGUMENTS) &> $WORKSPACE/test
+diff -u <($SHA1SUM $ARGUMENTS) <(./program $ARGUMENTS) &> $WORKSPACE/test
 if [ $? -ne 0 ]; then
     error "Failure"
 else
@@ -139,7 +149,7 @@ fi
 
 ARGUMENTS="Makefile README.md program.c asdf"
 printf " %-60s ... " "program $ARGUMENTS"
-diff -u <(sha1sum $ARGUMENTS 2> /dev/null) <(./program $ARGUMENTS) &> $WORKSPACE/test
+diff -u <($SHA1SUM $ARGUMENTS 2> /dev/null) <(./program $ARGUMENTS) &> $WORKSPACE/test
 if [ $? -ne 0 ]; then
     error "Failure"
 else
