@@ -174,6 +174,25 @@ else
 fi
 
 
+ARGUMENTS="Makefile README.md /bin/ls /bin/bash"
+printf " %-60s ... " "program $ARGUMENTS"
+diff -u <($SHA1SUM $ARGUMENTS 2> /dev/null| sort) <(./program $ARGUMENTS | sort) &> $WORKSPACE/test
+if [ $? -ne 0 ]; then
+    error "Failure"
+else
+    echo "Success"
+fi
+
+printf " %-60s ... " "program $ARGUMENTS (valgrind)"
+valgrind --leak-check=full ./program $ARGUMENTS &> $WORKSPACE/test
+if [ $? -ne 0 ] || [ $(awk '/ERROR SUMMARY:/ {print $4}' $WORKSPACE/test | sort -rn | tail -n 1) -ne 0 ]; then
+    echo "Exit Status: $?" >> $WORKSPACE/test
+    error "Failure"
+else
+    echo "Success"
+fi
+
+
 TESTS=$(($(grep -c Success $0) - 1))
 SCORE=$(python3 <<EOF
 print("{:0.2f}".format(($TESTS - $FAILURES) * 3.0 / $TESTS))
