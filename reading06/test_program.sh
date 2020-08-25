@@ -49,7 +49,7 @@ mkdir $WORKSPACE
 trap "cleanup" EXIT
 trap "cleanup 1" INT TERM
 
-echo "Testing reading05 program..."
+echo "Testing reading06 program..."
 
 
 printf " %-60s ... " "I/O System Calls"
