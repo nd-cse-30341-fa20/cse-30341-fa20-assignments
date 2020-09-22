@@ -14,8 +14,8 @@
 /* Structures */
 
 typedef struct {
-    int16_t base;
-    int16_t size;
+    uint16_t base;
+    uint16_t size;
 } SegmentRecord;
 
 /* Constants */
@@ -30,16 +30,16 @@ SegmentRecord MMU[] = {	// Segmentation Table stored in MMU
 int main(int argc, char *argv[]) {
     int16_t virtual_address;
 
-    while (fread(&virtual_address, sizeof(int16_t), 1, stdin)) {
-    	int16_t segment	= // TODO: Determine segment using SEGMENT_MASK and SEGMENT_SHIFT
-    	int16_t offset	= // TODO: Determine offset using OFFSET_MASK
+    while (fread(&virtual_address, sizeof(uint16_t), 1, stdin)) {
+    	uint16_t segment = // TODO: Determine segment using SEGMENT_MASK and SEGMENT_SHIFT
+    	uint16_t offset	 = // TODO: Determine offset using OFFSET_MASK
 
     	char *fault = "";
 	if () { // TODO: Perform bounds checking using MMU and offset
 	    fault = " Segmentation Fault";
 	}
 
-	int16_t physical_address = // TODO: Compute physical address using MMU and offset
+	uint16_t physical_address = // TODO: Compute physical address using MMU and offset
 	printf("VA[%04hx] -> PA[%04hx]%s\n", virtual_address, physical_address, fault);
     }
 
