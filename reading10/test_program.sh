@@ -2,7 +2,7 @@
 
 output() {
     cat <<EOF | base64 -d
-L2Rldi9tZDEyNwpleHQ0CnJhaWQxCjMyRwo3ODY0MzUzCjExNzY4MAo=
+L2Rldi9tZDEyNgpleHQ0CnJhaWQxCjMyRwo3ODY0MzUzCjExNzY4MAo=
 EOF
 }
 
